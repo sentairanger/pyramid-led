@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+body {
+	background-color: aqua;
+	
+}
+.on {
+	background-color: red;
+	color: black;
+}
+
+</style>
+</head>
+<body>
+	<h1> Pyramid LED Button</h1>
+<button class="on" id="led"> LED ON </button>
+<script>
+$('#led').on('mousedown', function(){
+	 $.get('/ledon');
+	});
+$('#led').on('mouseup', function(){
+	$.get('/ledoff');
+	
+	});
+
+
+</script>
+
+</body>
+</html>

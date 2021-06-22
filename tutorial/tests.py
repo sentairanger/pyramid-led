@@ -2,22 +2,6 @@ import unittest
 
 from pyramid import testing
 
-
-class TutorialViewTests(unittest.TestCase):
-    def setUp(self):
-        self.config = testing.setUp()
-
-    def tearDown(self):
-        testing.tearDown()
-
-    def test_led_button(self):
-        from .views import home
-
-        request = testing.DummyRequest()
-        response = home(request)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'', response.body)
-
 class TutorialFunctionalTests(unittest.TestCase):
     def setUp(self):
         from tutorial import main
@@ -26,6 +10,14 @@ class TutorialFunctionalTests(unittest.TestCase):
 
         self.testapp = TestApp(app)
 
-    def test_led_button(self):
+    def test_home(self):
         res = self.testapp.get('/', status=200)
+        self.assertIn(b'', res.body)
+    
+    def test_ledon(self):
+        res = self.testapp.get('/ledon', status=200)
+        self.assertIn(b'', res.body)
+        
+    def test_ledoff(self):
+        res = self.testapp.get('/ledoff', status=200)
         self.assertIn(b'', res.body)
