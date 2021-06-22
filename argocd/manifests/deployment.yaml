@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pyramid-led
+  name: pyramid-led
+  namespace: default 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyramid-led
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: django-led
+    spec:
+      containers:
+      - image: linuxrobotgeek/pyramid-led:v1.0.0
+        imagePullPolicy: IfNotPresent
+        name: pyramid-led
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
